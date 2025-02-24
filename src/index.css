@@ -67,6 +67,10 @@ button:focus-visible {
   }
 }
 
+body {
+  margin: 50px;
+}
+
 .logo {
   display: block;
   margin: 0 auto;
@@ -93,6 +97,7 @@ button:focus-visible {
 
 .NavBar nav {
   display: flex;
+  justify-content: center;
   gap: 2rem; /* space between links */
 }
 

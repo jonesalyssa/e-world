@@ -21,39 +21,42 @@ const NavBar = () => {
             <a className="NavLink" onClick={() => navigate("/cart")}>
               Cart
             </a>
+            <a className="NavLink" onClick={() => navigate("/account")}>
+              Account
+            </a>
             <a className="NavLink" onClick={() => navigate("/login")}>
               Login
             </a>
             {/*
             {!token ? (
               <>
-                <a
-                  className="nav-item nav-link"
-                  onClick={() => navigate("/Inventory")}
-                >
-                  Login
-                </a>
-                <a
-                  className="nav-item nav-link"
-                  onClick={() => navigate("/register")}
-                >
-                  Register
-                </a>
-              </>
-            ) : (
-              <>
-                <a
-                  className="nav-item nav-link"
-                  onClick={() => navigate("/account")}
-                >
-                  Account
-                </a>
-                <a
-                  className="nav-item nav-link"
-                  onClick={() => dispatch(setToken(null))}
-                >
-                  Logout
-                </a>
+            //     <a
+            //       className="nav-item nav-link"
+            //       onClick={() => navigate("/Inventory")}
+            //     >
+            //       Login
+            //     </a>
+            //     <a
+            //       className="nav-item nav-link"
+            //       onClick={() => navigate("/register")}
+            //     >
+            //       Register
+            //     </a>
+            //   </>
+            // ) : (
+            //   <>
+            //     <a
+            //       className="nav-item nav-link"
+            //       onClick={() => navigate("/account")}
+            //     >
+            //       Account
+            //     </a>
+            //     <a
+            //       className="nav-item nav-link"
+            //       onClick={() => dispatch(setToken(null))}
+            //     >
+            //       Logout
+            //     </a>
               </>
             )}
             */}
