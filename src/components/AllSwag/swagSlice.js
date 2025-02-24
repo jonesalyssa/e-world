@@ -1,12 +1,14 @@
-import { api } from "src/app/api";
+import { api } from "../../app/api";
 
 const swagApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    query: () => ({
-      url: "/items",
-      method: "GET",
+    getSwag: builder.query({
+      query: () => ({
+        url: "/items",
+        method: "GET",
+      }),
+      providesTags: ["Swag", "User"],
     }),
-    providesTags: ["Swag", "User"],
   }),
 });
 export const { useGetSwagQuery } = swagApi;

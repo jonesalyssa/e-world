@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { Provider } from "react-redux";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import store from "./app/store";
+import NavBar from "./components/Nav";
+import SwagDisplay from "./components/AllSwag/swagDisplay";
+import logoImage from "./assets/logo.png";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Account from "./components/Account/Account";
 
-function App() {
-  const [count, setCount] = useState(0)
+import "./index.css";
+
+export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuthenticated");
+    setIsAuthenticated(authStatus === "true");
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Provider store={store}>
+      <Router>
+        <div>
+          <div className="header">
+            <img src={logoImage} alt="Logo" className="logo" />
+          </div>
+          <NavBar />
+          <main>
+            <Routes>
+              <Route path="/Inventory" element={<SwagDisplay />} />
+              <Route path="/Register" element={<Register />} />
+              <Route
+                path="/Login"
+                element={<Login setIsAuthenticated={setIsAuthenticated} />}
+              />
+              <Route
+                path="/account"
+                element={
+                  isAuthenticated ? (
+                    <Account />
+                  ) : (
+                    <Login setIsAuthenticated={setIsAuthenticated} />
+                  )
+                }
+              />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </Provider>
+  );
 }
-
-export default App

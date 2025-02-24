@@ -1,3 +1,5 @@
+// This is not working
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetSwagQuery } from "./swagSlice";
@@ -11,8 +13,8 @@ export default function Swag() {
     swag.item.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (error) return <p>Error loading swag: {error.message}</p>;
-  if (isLoading) return <p>Loading swag...</p>;
+  if (error) return <p>Error loading.</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <article>
