@@ -23,8 +23,8 @@ function Login({ setIsAuthenticated }) {
 
   return (
     <div>
-      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
+        <h2>Login</h2>
         <div>
           <label>Email:</label>
           <input
@@ -46,10 +46,12 @@ function Login({ setIsAuthenticated }) {
         <div className="login-buttons">
           <button type="submit">Login</button>
         </div>
+        <div className="register-buttons">
+          <button type="submit">
+            <Link to="/register">Register</Link>
+          </button>
+        </div>
       </form>
-      <button>
-        <Link to="/register">Register here</Link>
-      </button>
     </div>
   );
 }

@@ -37,8 +37,9 @@ export default function Account() {
   }
 
   return (
-    <div>
+    <div className="Account">
       <h2>Account Details</h2>
+
       <p>
         <strong>Name:</strong> {user.name}
       </p>

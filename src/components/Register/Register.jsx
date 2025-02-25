@@ -26,9 +26,9 @@ export default function Register() {
 
   return (
     <div>
-      <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <div>
+          <h2>Register</h2>
           <label>Name:</label>
           <input
             type="text"
@@ -64,7 +64,9 @@ export default function Register() {
             required
           />
         </div>
-        <button type="submit">Create your Account</button>
+        <div className="register-buttons">
+          <button type="submit">Create an Account</button>
+        </div>
       </form>
     </div>
   );

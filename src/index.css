@@ -15,7 +15,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #000000;
   text-decoration: inherit;
 }
 a:hover {
@@ -24,6 +24,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -67,9 +68,7 @@ button:focus-visible {
   }
 }
 
-body {
-  margin: 50px;
-}
+/* My CSS */
 
 .logo {
   display: block;
@@ -98,18 +97,135 @@ body {
 .NavBar nav {
   display: flex;
   justify-content: center;
-  gap: 2rem; /* space between links */
+  gap: 2rem;
 }
 
 .NavBar a {
-  color: white; /* white text */
+  color: white;
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
-/* Hover effect (optional) */
 .NavBar a:hover {
   color: #ccc;
   cursor: pointer;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown > .NavLink {
+  cursor: pointer;
+  text-decoration: none;
+  padding: 8px 12px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.dropdown-menu .dropdown {
+  padding: 8px 12px;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  display: block;
+  background-color: #621f06;
+}
+
+.dropdown-menu .dropdown:hover {
+  background: #501804;
+}
+
+.dropdown > .NavLink::after {
+  content: none !important;
+}
+
+.login-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Adds space between buttons */
+  margin-top: 20px;
+}
+
+.login-buttons button {
+  background-color: #d3d0cf;
+  color: black;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.login-buttons button:hover {
+  background-color: #999795;
+}
+
+.register-buttons {
+  display: flex;
+  color: rgb(0, 0, 0);
+  justify-content: center;
+  gap: 15px; /* Adds space between buttons */
+  margin-top: 20px;
+}
+
+.register-buttons button {
+  background-color: #d3d0cf;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.register-buttons button:hover {
+  background-color: #999795;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+  margin: 20px auto;
+  justify-content: center;
+  background-color: #f2f1ee;
+  padding: 50px;
+}
+
+.Account {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+  margin: 20px auto;
+  justify-content: center;
+  background-color: #f2f1ee;
+  padding: 50px;
+}
+
+h2 {
+  text-align: center;
 }
