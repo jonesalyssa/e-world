@@ -161,7 +161,7 @@ button:focus-visible {
 }
 
 .login-buttons button {
-  background-color: #d3d0cf;
+  background-color: #b08070;
   color: black;
   border: none;
   padding: 12px 20px;
@@ -174,7 +174,7 @@ button:focus-visible {
 }
 
 .login-buttons button:hover {
-  background-color: #999795;
+  background-color: #a9a9a8;
 }
 
 .register-buttons {
@@ -186,7 +186,7 @@ button:focus-visible {
 }
 
 .register-buttons button {
-  background-color: #d3d0cf;
+  background-color: #92746a;
   color: rgb(0, 0, 0);
   border: none;
   padding: 12px 20px;
@@ -210,7 +210,7 @@ form {
   gap: 10px;
   margin: 20px auto;
   justify-content: center;
-  background-color: #f2f1ee;
+  background-color: #180417;
   padding: 50px;
 }
 
