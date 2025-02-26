@@ -18,7 +18,7 @@ export default function Swag() {
 
   return (
     <article>
-      <h1>Library Swags</h1>
+      <h1>Swags</h1>
       <input
         type="text"
         placeholder="Search for an item"
