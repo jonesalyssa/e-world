@@ -41,3 +41,5 @@ export const {
   useRemoveFromCartMutation,
   useUpdateCartItemQuantityMutation,
 } = cartApi;
+
+export { cartApi };

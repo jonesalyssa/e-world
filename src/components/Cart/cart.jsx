@@ -3,14 +3,17 @@ import {
   useRemoveFromCartMutation,
   useUpdateCartItemQuantityMutation,
 } from "./cartSlice";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
-function ShoppingCart() {
+
+function Cart() {
   const { data: cartData, error, isLoading } = useGetCartQuery();
   const [removeFromCart] = useRemoveFromCartMutation();
   const [updateQuantity] = useUpdateCartItemQuantityMutation();
-  const cart = Array.isArray(cartData?.items) ? cartData.items : [];
   const [totals, setTotals] = useState({ subtotal: 0, shipping: 20, total: 0 });
+const cart = useMemo(() => {
+  return Array.isArray(cartData?.items) ? cartData.items : [];
+}, [cartData?.items]);
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -18,18 +21,30 @@ function ShoppingCart() {
       cart.forEach((item) => {
         newSubtotal += item.price * item.quantity;
       });
-      setTotals({ ...totals, subtotal: newSubtotal, total: newSubtotal + totals.shipping });
+      setTotals((prevTotals) => ({
+        ...prevTotals,
+        subtotal: newSubtotal,
+        total: newSubtotal + prevTotals.shipping,
+      }));
     } else {
-      setTotals({ ...totals, subtotal: 0, total: 0 });
+      setTotals({ subtotal: 0, total: 0 });
     }
   }, [cart, totals.shipping]);
 
-  const handleRemove = (itemId) => {
-    removeFromCart(itemId);
+  const handleRemove = (itemId, itemName) => {
+    if (
+      window.confirm(
+        `Are you sure you want to remove "${itemName}" from your cart?`,
+      )
+    ) {
+      removeFromCart(itemId);
+    }
   };
 
   const handleQuantityChange = (itemId, newQuantity) => {
-    updateQuantity({ itemId, quantity: newQuantity });
+    if (newQuantity >= 1) {
+      updateQuantity({ itemId, quantity: newQuantity });
+    }
   };
 
   if (error) return <p>Error loading cart.</p>;
@@ -151,4 +166,4 @@ function ShoppingCart() {
   );
 }
 
-export default ShoppingCart;
+export default Cart;
