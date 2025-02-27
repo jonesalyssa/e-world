@@ -213,7 +213,7 @@ form {
   gap: 10px;
   margin: 20px auto;
   justify-content: center;
-  background-color: #180417;
+  background-color: #0f0f0f;
   padding: 50px;
 }
 
@@ -231,4 +231,9 @@ form {
 
 h2 {
   text-align: center;
+}
+
+input{
+  background-color: #4d474a;
+  cursor:nesw-resize;
 }

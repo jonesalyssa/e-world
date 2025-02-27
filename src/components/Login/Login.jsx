@@ -25,9 +25,9 @@ function Login({ setIsAuthenticated }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <strong><h2>Login</h2></strong>
         <div>
-          <label>Email:</label>
+          <strong><label>Email: </label></strong>
           <input
             type="email"
             value={email}
@@ -36,7 +36,7 @@ function Login({ setIsAuthenticated }) {
           />
         </div>
         <div>
-          <label>Password:</label>
+          <strong><label>Password: </label></strong>
           <input
             type="password"
             value={password}
