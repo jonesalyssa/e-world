@@ -4,13 +4,14 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://e-world-backend.onrender.com",
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().token;
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
       headers.set("Content-Type", "application/json");
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
-      return headers;
+        headers.set("Authorization", `Bearer ${token}`);
+    }
+    headers.set("Content-Type","application/json");
+    return headers;
     },
   }),
   tagTypes: ["Swag", "User"],

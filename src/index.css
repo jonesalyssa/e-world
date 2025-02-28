@@ -205,7 +205,7 @@ button:focus-visible {
   background-color: #999795;
 }
 
-form {
+/* form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -215,7 +215,7 @@ form {
   justify-content: center;
   background-color: #0f0f0f;
   padding: 50px;
-}
+} */
 
 .Account {
   display: flex;

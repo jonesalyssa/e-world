@@ -12,6 +12,7 @@ import Account from "./components/Account/Account";
 import "./index.css";
 
 export default function App() {
+  const [token, setToken] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {

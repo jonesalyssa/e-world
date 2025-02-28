@@ -1,39 +1,58 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "./RegisterSlice";
 
 export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const navigate = useNavigate();
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
+  const [form, setForm] = useState({ username:"", email: "", password: "", confirmPassword: "" });
+  // const navigate = useNavigate();
+  const [registerUser] = useRegisterMutation();
 
   const handleRegister = (e) => {
-    e.preventDefault();
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+  }));
+};
+const submit = async (e) => {
+  e.preventDefault();
+  try{
+      const response = await registerUser(form).unwrap();
+      
+      // navigate("/");
+  }catch (error) {
+      console.error(error);
+  }
+};
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
 
-    localStorage.setItem("userEmail", email);
-    localStorage.setItem("userPassword", password);
+    // if (form.password !== form.confirmPassword) {
+    //   alert("Passwords do not match");
+    //   return;
+    // }
 
-    localStorage.setItem("userName", name);
+    // localStorage.setItem("userEmail", form.email);
+    // localStorage.setItem("userPassword", form.password);
 
-    navigate("/login");
-  };
+    // localStorage.setItem("userName", form.username);
+
+    // navigate("/register");
+
 
   return (
     <div>
-      <form onSubmit={handleRegister}>
+      <form onSubmit={submit}>
         <div>
           <h2>Register</h2>
-          <label>Name:</label>
+          <label>Username:</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={form.username}
+            name ="username"
+            onChange={handleRegister}
             required
           />
         </div>
@@ -41,8 +60,9 @@ export default function Register() {
           <label>Email:</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            name = "email"
+            onChange={handleRegister}
             required
           />
         </div>
@@ -50,8 +70,9 @@ export default function Register() {
           <label>Password:</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={form.password}
+            name="password"
+            onChange={handleRegister}
             required
           />
         </div>
@@ -59,8 +80,9 @@ export default function Register() {
           <label>Retype Password:</label>
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={form.confirmPassword}
+            name="confirmPassword"
+            onChange={handleRegister}
             required
           />
         </div>
@@ -71,3 +93,4 @@ export default function Register() {
     </div>
   );
 }
+
