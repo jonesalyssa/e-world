@@ -3,10 +3,6 @@ import { useState } from "react";
 import { useRegisterMutation } from "./RegisterSlice";
 
 export default function Register() {
-  // const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
   const [form, setForm] = useState({ username:"", email: "", password: "", confirmPassword: "" });
   // const navigate = useNavigate();
   const [registerUser] = useRegisterMutation();
@@ -21,7 +17,6 @@ const submit = async (e) => {
   e.preventDefault();
   try{
       const response = await registerUser(form).unwrap();
-      
       // navigate("/");
   }catch (error) {
       console.error(error);
@@ -34,10 +29,6 @@ const submit = async (e) => {
     //   return;
     // }
 
-    // localStorage.setItem("userEmail", form.email);
-    // localStorage.setItem("userPassword", form.password);
-
-    // localStorage.setItem("userName", form.username);
 
     // navigate("/register");
 

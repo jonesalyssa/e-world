@@ -1,37 +1,58 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "./LoginSlice";
 
-function Login({ setIsAuthenticated }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function Login() {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const [form, setForm] = useState ({ username: "", password: ""});
   const navigate = useNavigate();
+  const [loginUser] = useLoginMutation();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const storedEmail = localStorage.getItem("userEmail");
-    const storedPassword = localStorage.getItem("userPassword");
-
-    if (email === storedEmail && password === storedPassword) {
-      localStorage.setItem("isAuthenticated", "true");
-      setIsAuthenticated(true);
-      navigate("/");
-    } else {
-      alert("Invalid login credentials");
-    }
+    setForm((prev)=>({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
+    
+  const submit = async (e) =>{
+    e.preventDefault();
+    try {
+      const response = await loginUser(form);
+      console.log(response);
+      localStorage.setItem("token", response.data.token)
+      // navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  //   const storedEmail = localStorage.getItem("userEmail");
+  //   const storedPassword = localStorage.getItem("userPassword");
+
+  //   if (email === storedEmail && password === storedPassword) {
+  //     localStorage.setItem("isAuthenticated", "true");
+  //     setIsAuthenticated(true);
+  //     navigate("/");
+  //   } else {
+  //     alert("Invalid login credentials");
+  //   }
+  // };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submit}>
         <strong><h2>Login</h2></strong>
         <div>
-          <strong><label>Email: </label></strong>
+          <strong><label>Username: </label></strong>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            id="exampleInputUsername1"
+            value={form.username}
+            onChange={handleSubmit}
+            name ="username"
             required
           />
         </div>
@@ -39,8 +60,10 @@ function Login({ setIsAuthenticated }) {
           <strong><label>Password: </label></strong>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id="exampleInputPassword1"
+            value={form.password}
+            name="password"
+            onChange={handleSubmit}
             required
           />
         </div>
@@ -103,4 +126,4 @@ Login.propTypes = {
   setIsAuthenticated: PropTypes.func.isRequired,
 };
 
-export default Login;
+
