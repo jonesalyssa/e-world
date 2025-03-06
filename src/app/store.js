@@ -2,11 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 // import userReducer from "../components/userSlice";
 import {cartApi}from "../components/Cart/cartSlice";
 import { api } from "./api";
+// import {thunk} from 'redux-thunk';
+import productReducer from "../redux/reducers/productReducer";
 
 
 const store = configureStore({
   reducer: {
     // user: userReducer,
+    products: productReducer,
     [api.reducerPath]: api.reducer,
     cart: cartApi,
   },

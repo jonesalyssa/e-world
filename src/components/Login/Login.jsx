@@ -49,7 +49,7 @@ function Login({ setIsAuthenticated }) {
         </div>
         <div className="register-buttons">
           <button type="submit">
-            <Link to="/register">Register</Link>
+            <Link to="/Register">Register</Link>
           </button>
         </div>
       </form>

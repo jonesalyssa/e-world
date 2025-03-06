@@ -10,6 +10,7 @@ import Register from "./components/Register/Register";
 import Account from "./components/Account/Account";
 
 import "./index.css";
+import ProductList from "./components/ProductList";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,6 +29,7 @@ export default function App() {
           </div>
           <NavBar />
           <main>
+            <ProductList />
             <Routes>
               <Route path="/Inventory" element={<SwagDisplay />} />
               <Route path="/Register" element={<Register />} />
