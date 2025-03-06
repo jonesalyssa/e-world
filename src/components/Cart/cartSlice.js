@@ -1,45 +1,39 @@
-import { api } from "../../app/api"; 
+import { api } from "../../app/api";
+import { createSlice } from "@reduxjs/toolkit";
 
-const cartApi = api.injectEndpoints({
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: { items: [] },
+  reducers: {
+    addToCart: (state, action) => {
+      const item = action.payload;
+      if (!state.items.some((item) => item.id === item.id)) {
+        state.items.push(item);
+      }
+    },
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+    clearCart: (state) => {
+      state.items = [];
+    },
+  },
+});
+
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;
+
+export const cartApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getCart: builder.query({
+    login: builder.mutation({
       query: () => ({
-        url: "/cart",
-        method: "GET",
-      }),
-      providesTags: ["Cart"],
-    }),
-    addToCart: builder.mutation({
-      query: (item) => ({
-        url: "/cart",
+        url: "/auth/cart",
         method: "POST",
-        body: item,
+        body: {},
       }),
-      invalidatesTags: ["Cart"],
-    }),
-    removeFromCart: builder.mutation({
-      query: (itemId) => ({
-        url: `/cart/${itemId}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["Cart"],
-    }),
-    updateCartItemQuantity: builder.mutation({
-      query: ({ itemId, quantity }) => ({
-        url: `/cart/${itemId}`,
-        method: "PUT",
-        body: { quantity },
-      }),
-      invalidatesTags: ["Cart"],
+      invalidatesTags: ["Swag", "User"],
     }),
   }),
 });
 
-export const {
-  useGetCartQuery,
-  useAddToCartMutation,
-  useRemoveFromCartMutation,
-  useUpdateCartItemQuantityMutation,
-} = cartApi;
-
-export { cartApi };
+export const { useLoginMutation } = cartApi;

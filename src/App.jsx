@@ -13,6 +13,7 @@ import "./index.css";
 import ProductList from "./components/ProductList";
 
 export default function App() {
+  const [token, setToken] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import {cartApi}from "../components/Cart/cartSlice";
 import { api } from "./api";
 // import {thunk} from 'redux-thunk';
 import productReducer from "../redux/reducers/productReducer";
+import registerSlice from "../components/Register/RegisterSlice";
 
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     // user: userReducer,
     products: productReducer,
     [api.reducerPath]: api.reducer,
+    register: registerSlice,
     cart: cartApi,
   },
   middleware: (getDefaultMiddleware) =>
