@@ -1,29 +1,34 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetSwagQuery } from "./singleSwagSlice";
 
-export default function singleProduct(selectedProductId, setSelectedProductId) {
+export default function SingleProduct({
+  selectedProductId,
+  setSelectedProductId,
+}) {
   const { id } = useParams();
   const { data, isSuccess, isLoading } = useGetSwagQuery(id);
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState();
 
   useEffect(() => {
     if (isSuccess) {
       setProduct(data.product);
+      setSelectedProductId(data.product.id);
     }
-  }, [data]);
+  }, [data, isSuccess, setSelectedProductId]);
+
+  console.log(product);
+  console.log(selectedProductId);
+
+  if (isLoading) return <p>Loading Product information...</p>;
+  if (!product) return <p>Please select a product to see more details.</p>;
 
   let $details;
-  // No Book Selected
   if (!selectedProductId) {
     $details = <p>Please select a product to see more details.</p>;
-  }
-  // A book has been selected, but results have not yet returned from the API
-  else if (isLoading) {
+  } else if (isLoading) {
     $details = <p>Loading Product information...</p>;
-  }
-  // Display Book Selected
-  else {
+  } else {
     $details = (
       <>
         <h3>
@@ -35,14 +40,14 @@ export default function singleProduct(selectedProductId, setSelectedProductId) {
           <img src={product.image} />
         </figure>
         <div className="book">
-          <button
+          {/* <button
             type="button"
             className="btn btn-primary "
             onClick={() => addtoCart(product.id)}
           >
             {" "}
             Checkout{" "}
-          </button>
+          </button> */}
         </div>
       </>
     );
