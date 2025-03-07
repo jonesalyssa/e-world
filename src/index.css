@@ -233,7 +233,11 @@ h2 {
   text-align: center;
 }
 
-input{
+input {
   background-color: #4d474a;
-  cursor:nesw-resize;
+  cursor: nesw-resize;
+}
+
+image {
+  width: 300px;
 }

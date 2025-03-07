@@ -30,13 +30,13 @@ const NavBar = () => {
                 <div className="dropdown-menu">
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/women/clothing")}
+                    onClick={() => navigate("/women/shirts")}
                   >
-                    Clothing
+                    Shirts
                   </a>
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/women/shoes")}
+                    onClick={() => navigate("/women/jackets")}
                   >
                     Shoes
                   </a>
@@ -62,15 +62,15 @@ const NavBar = () => {
                 <div className="dropdown-menu">
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/men/clothing")}
+                    onClick={() => navigate("/men/shirts")}
                   >
-                    Clothing
+                    Shirts
                   </a>
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/men/shoes")}
+                    onClick={() => navigate("/men/jackets")}
                   >
-                    Shoes
+                    Jackets
                   </a>
                   <a
                     className="dropdown"
