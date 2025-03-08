@@ -1,17 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import userReducer from "../components/userSlice";
-import {cartApi}from "../components/Cart/cartSlice";
+import { cartApi } from "../components/Cart/cartSlice";
 import { api } from "./api";
+// import {ThirdPartyApi}  from "./thirdPartyApi"
 // import {thunk} from 'redux-thunk';
 import productReducer from "../redux/reducers/productReducer";
 import registerSlice from "../components/Register/RegisterSlice";
-
 
 const store = configureStore({
   reducer: {
     // user: userReducer,
     products: productReducer,
     [api.reducerPath]: api.reducer,
+    // [ThirdPartyApi.reducerPath]: ThirdPartyApi.reducer,
     register: registerSlice,
     cart: cartApi,
   },

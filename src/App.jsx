@@ -8,13 +8,15 @@ import logoImage from "./assets/logo.png";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Account from "./components/Account/Account";
+import SingleSwag from "./components/SingleSwag/SingleSwag";
 
 import "./index.css";
 import ProductList from "./components/ProductList";
 
 export default function App() {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState();
 
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuthenticated");
@@ -30,10 +32,17 @@ export default function App() {
           </div>
           <NavBar />
           <main>
-            <ProductList />
+            {/* <ProductList /> */}
             <Routes>
-              <Route path="/Inventory" element={<SwagDisplay />} />
+              <Route path="/" element={<SwagDisplay/>}  />
               <Route path="/Register" element={<Register />} />
+              <Route
+                path="/products/:id"
+                element={
+                  <SingleSwag selectedProductId={selectedProductId} setSelectedProductId={setSelectedProductId}
+                  />
+                }
+              />
               <Route
                 path="/Login"
                 element={<Login setIsAuthenticated={setIsAuthenticated} />}

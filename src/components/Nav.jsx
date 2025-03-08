@@ -3,7 +3,7 @@
 
 // import { useDispatch, useSelector } from "react-redux";
 // import { setToken } from "./Account/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 
 const NavBar = () => {
@@ -18,6 +18,9 @@ const NavBar = () => {
       <div className="container">
         <header>
           <nav>
+          <li className="nav-item">
+                    <Link to="/">Home</Link>
+                </li>
             {/* Women Dropdown */}
             <div className="dropdown">
               <a
@@ -30,13 +33,13 @@ const NavBar = () => {
                 <div className="dropdown-menu">
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/women/clothing")}
+                    onClick={() => navigate("/women/shirts")}
                   >
-                    Clothing
+                    Shirts
                   </a>
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/women/shoes")}
+                    onClick={() => navigate("/women/jackets")}
                   >
                     Shoes
                   </a>
@@ -62,15 +65,15 @@ const NavBar = () => {
                 <div className="dropdown-menu">
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/men/clothing")}
+                    onClick={() => navigate("/men/shirts")}
                   >
-                    Clothing
+                    Shirts
                   </a>
                   <a
                     className="dropdown"
-                    onClick={() => navigate("/men/shoes")}
+                    onClick={() => navigate("/men/jackets")}
                   >
-                    Shoes
+                    Jackets
                   </a>
                   <a
                     className="dropdown"
