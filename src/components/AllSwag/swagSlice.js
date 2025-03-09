@@ -4,10 +4,10 @@ const allSwagApi = ThirdPartyApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllSwag: builder.query({
       query: () => ({
-        url: "/",
+        url: "",
         method: "GET",
       }),
-      providesTags: ["products"],
+      providesTags: ["Swag", "User"],
     }),
   }),
 });

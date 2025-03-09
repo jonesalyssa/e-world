@@ -24,7 +24,7 @@ export default function App() {
   }, []);
 
   return (
-    <Provider store={store}>
+    // <Provider store={store}>
       <Router>
         <div>
           <div className="header">
@@ -61,6 +61,6 @@ export default function App() {
           </main>
         </div>
       </Router>
-    </Provider>
+    // </Provider>
   );
 }
