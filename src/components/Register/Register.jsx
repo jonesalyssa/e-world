@@ -3,7 +3,12 @@ import { useState } from "react";
 import { useRegisterMutation } from "./RegisterSlice";
 
 export default function Register() {
-  const [form, setForm] = useState({ username:"", email: "", password: "", confirmPassword: "" });
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   // const navigate = useNavigate();
   const [registerUser] = useRegisterMutation();
 
@@ -11,77 +16,86 @@ export default function Register() {
     setForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-  }));
-};
-const submit = async (e) => {
-  e.preventDefault();
-  try{
+    }));
+  };
+  const submit = async (e) => {
+    e.preventDefault();
+    try {
       const response = await registerUser(form).unwrap();
       // navigate("/");
-  }catch (error) {
+    } catch (error) {
       console.error(error);
-  }
-};
+    }
+  };
 
+  // if (form.password !== form.confirmPassword) {
+  //   alert("Passwords do not match");
+  //   return;
+  // }
 
-    // if (form.password !== form.confirmPassword) {
-    //   alert("Passwords do not match");
-    //   return;
-    // }
-
-
-    // navigate("/register");
-
+  // navigate("/register");
 
   return (
-    <div>
-      <form onSubmit={submit}>
-        <div>
-          <h2>Register</h2>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={form.username}
-            name ="username"
-            onChange={handleRegister}
-            required
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={form.email}
-            name = "email"
-            onChange={handleRegister}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={form.password}
-            name="password"
-            onChange={handleRegister}
-            required
-          />
-        </div>
-        <div>
-          <label>Retype Password:</label>
-          <input
-            type="password"
-            value={form.confirmPassword}
-            name="confirmPassword"
-            onChange={handleRegister}
-            required
-          />
-        </div>
-        <div className="register-buttons">
-          <button type="submit">Create an Account</button>
-        </div>
-      </form>
-    </div>
+    <section className="login-section">
+      <div>
+        <form onSubmit={submit}>
+          <div>
+            <h1>REGISTER</h1>
+            <label>
+              {" "}
+              <strong>Username:</strong>
+            </label>
+            <input
+              type="text"
+              value={form.username}
+              name="username"
+              onChange={handleRegister}
+              required
+            />
+          </div>
+          <div>
+            <label>
+              {" "}
+              <strong>Email:</strong>
+            </label>
+            <input
+              type="email"
+              value={form.email}
+              name="email"
+              onChange={handleRegister}
+              required
+            />
+          </div>
+          <div>
+            <label>
+              <strong>Password:</strong>
+            </label>
+            <input
+              type="password"
+              value={form.password}
+              name="password"
+              onChange={handleRegister}
+              required
+            />
+          </div>
+          <div>
+            <label>
+              {" "}
+              <strong>Retype Password:</strong>
+            </label>
+            <input
+              type="password"
+              value={form.confirmPassword}
+              name="confirmPassword"
+              onChange={handleRegister}
+              required
+            />
+          </div>
+          <div className="register-buttons">
+            <button type="submit">Create an Account</button>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 }
-
