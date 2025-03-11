@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "/src/index.css";
+import Footer from "/src/components/Footer";
 
 import { useGetAllSwagQuery } from "./swagSlice";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Products() {
   const { data, isSuccess, isLoading, error } = useGetAllSwagQuery();
   const [product, setProduct] = useState();
@@ -15,11 +17,11 @@ export default function Products() {
     navigate(`/products/${id}`);
   };
 
-  const [searchTerm, setSearchTerm] = useState('');
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handlesearch = (e) => {
     e.preventDefault();
-    const filtered = data?.filter((item) => 
+    const filtered = data?.filter((item) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
@@ -29,83 +31,66 @@ export default function Products() {
     console.log("Data loaded successfully:", data);
   }
 
-  // Loading state: show loading message until data is fetched
   if (isLoading) {
     return <h3>Loading...</h3>;
   }
 
-  // Error handling: if there’s an error in fetching data, show an error message
   if (error) {
     return <h3>Error loading data!</h3>;
   }
 
-  // Data is available and successfully fetched
   console.log(data);
   console.log(product);
 
-  console.log('isLoading:', isLoading);
-console.log('isSuccess:', isSuccess);
-console.log('data:', data);
+  console.log("isLoading:", isLoading);
+  console.log("isSuccess:", isSuccess);
+  console.log("data:", data);
 
   return (
     <article>
-      <h2>All Products</h2>
-      <div>
-        <form onSubmit={handlesearch}>
+      <h1>All Products</h1>
+      <hr className="divider"></hr>
+      <div className="search">
+        <form className="search" onSubmit={handlesearch}>
           <label>
             <input
               type="text"
-              name="Swag"
+              name="Product"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search Title..."
             />
           </label>
-          <button type="submit">Search Swag</button>
+          <button className="search-button" type="submit">
+            Search Items
+          </button>
         </form>
       </div>
-      
-      <ul className="swag">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((p) => (
-            <li key={p.id} className="swag">
+
+      <ul className="all-container">
+        {(filteredProducts.length > 0 ? filteredProducts : data).map((p) => (
+          <li key={p.id} className="view-all">
+            <figure className="all-figure">
+              <img className="products-image" src={p.image} alt={p.title} />
+            </figure>
+            <div className="product-description">
               <h3>
-                {p.title} Price: {p.price}
+                <strong>{p.title}</strong>
               </h3>
-              <figure>
-                <img src={p.image} alt={p.title} />
-              </figure>
+              <br></br>
+              <h3>${p.price}</h3>
+              {/* <p className="rating">⭐ {p.rating} / */}
               <button
                 type="button"
-                className="btn btn-info"
+                className="see-details"
                 onClick={() => seeProductDetails(p.id)}
               >
                 See Details
               </button>
-            </li>
-          ))
-        ) : (
-          data.map((p) => (
-            <li key={p.id} className="swag">
-              <h3>
-                {p.title} Price {p.price}
-              </h3>
-              <figure>
-                <img src={p.image} alt={p.name} />
-              </figure>
-              <button
-                type="button"
-                className="btn btn-info"
-                onClick={() => seeProductDetails(p.id)}
-              >
-                See Details
-              </button>
-            </li>
-          ))
-        )}
+            </div>
+          </li>
+        ))}
       </ul>
     </article>
   );
 }
-
-

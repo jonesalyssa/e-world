@@ -5,42 +5,47 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import "../index.css";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
   const seeProductDetails = (id) => {
     navigate(`/products/${id}`);
   };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card className="product-card">
       <CardMedia
         component="img"
-        height="140"
+        className="product-image"
         image={product.image}
         alt={product.title}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          {product.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          ${product.price}
-        </Typography>
+      <CardContent className="product-content">
+        <Typography className="product-title">{product.title}</Typography>
+        <Typography className="product-rating">{product.rating}</Typography>
+
+        <Typography className="product-price">${product.price}</Typography>
         <button
           type="button"
-          className="btn btn-info"
+          className="product-button"
           onClick={() => seeProductDetails(product.id)}
         >
-          {" "}
           See Details
-        </button>{" "}
+        </button>
       </CardContent>
     </Card>
   );
 }
 
 ProductCard.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default ProductCard;
