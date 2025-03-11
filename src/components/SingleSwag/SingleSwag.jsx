@@ -32,15 +32,14 @@ export default function SingleProduct({ selectedProductId,setSelectedProductId})
   } else {
     $details = (
       <>
-        <h3>
-          {product.title} 
-        </h3>
-        Price: <h3> {product.price}</h3>
-        Description: <h4>{data.description}</h4>
-        {/* <h4> {product.available}</h4> */}
         <figure>
           <img src={data.image} />
         </figure>
+        <h3>{product.title}</h3>
+        Price: <h3> {product.price}</h3>
+        Description: <h4>{data.description}</h4>
+        {/* <h4> {product.available}</h4> */}
+   
         <div className="book">
           {/* <button
             type="button"
