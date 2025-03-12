@@ -1,6 +1,3 @@
-// Everything commented out below is bc we don't have userSlice finished yet.
-// It can be brought back in when it's time. - Alyssa
-
 // import { useDispatch, useSelector } from "react-redux";
 // import { setToken } from "./Account/userSlice";
 import { useNavigate, Link } from "react-router-dom";
@@ -8,8 +5,8 @@ import { useState } from "react";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [womenDropdownOpen, setWomenDropdownOpen] = useState(false);
-  const [menDropdownOpen, setMenDropdownOpen] = useState(false);
+  // const [womenDropdownOpen, setWomenDropdownOpen] = useState(false);
+  // const [menDropdownOpen, setMenDropdownOpen] = useState(false);
   // const dispatch = useDispatch();
   // const { token } = useSelector((state) => state.userSlice);
 
@@ -18,10 +15,10 @@ const NavBar = () => {
       <div className="container">
         <header>
           <nav>
-          <li className="nav-item">
-                    <Link to="/">Home</Link>
-                </li>
-            {/* Women Dropdown */}
+            <li className="nav-item">
+              <Link to="/">Home</Link>
+            </li>
+            {/* Women Dropdown
             <div className="dropdown">
               <a
                 className="NavLink"
@@ -52,8 +49,7 @@ const NavBar = () => {
                 </div>
               )}
             </div>
-
-            {/* Men Dropdown */}
+            {/* Men Dropdown 
             <div className="dropdown">
               <a
                 className="NavLink"
@@ -84,7 +80,6 @@ const NavBar = () => {
                 </div>
               )}
             </div>
-
             <a className="NavLink" onClick={() => navigate("/home&kitchen")}>
               Home & Kitchen
             </a>
@@ -97,7 +92,9 @@ const NavBar = () => {
               }}
             >
               Sale
-            </a>
+            </a>{" "}
+            */}
+
             <a className="NavLink" onClick={() => navigate("/cart")}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +121,6 @@ const NavBar = () => {
             <a className="NavLink" onClick={() => navigate("/login")}>
               Login
             </a>
-
             {/* 
             // This section is commented out until userSlice is implemented.
             // Once ready, uncomment it to enable login/logout logic.

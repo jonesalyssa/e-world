@@ -40,12 +40,13 @@ export default function SingleProduct({
             <h4 className="price"> ${product.price}</h4>
             <br />
             <h4 className="description">{data.description}</h4>
+            <br />
             <button
               type="button"
               className="cart-button"
               onClick={() => addtoCart(product.id)}
             >
-              Checkout
+              Add to Cart
             </button>
           </div>
           <div className="single-pic">

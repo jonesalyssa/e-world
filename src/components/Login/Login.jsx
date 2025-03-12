@@ -77,10 +77,12 @@ export default function Login() {
               required
             />
           </div>
+          <br />
           <div className="login-buttons">
             <button type="submit">Login</button>
           </div>
-          <div className="register-buttons">
+          <br />
+          <div className="login-buttons">
             <Link to="/Register">
               <button type="button" className="btn btn-primary">
                 Register

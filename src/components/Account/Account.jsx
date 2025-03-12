@@ -35,38 +35,48 @@ export default function Account() {
   if (!user) {
     return <p>Loading...</p>;
   }
-
   return (
-    <div className="Account">
-      <h2>Account Details</h2>
-
-      <p>
-        <strong>Name:</strong> {user.name}
-      </p>
-      <p>
-        <strong>Email:</strong> {user.email}
-      </p>
-
-      <h3>Purchase History</h3>
-      {purchasedSwags.length === 0 ? (
-        <p>No purchase history.</p>
-      ) : (
-        purchasedSwags.map((book, index) => (
-          <div key={index}>
-            <p>{/* {book.item}  */}</p>
-            <button onClick={() => handleReturnSwag(index)}>Return Item</button>
-          </div>
-        ))
-      )}
-
-      <button
-        onClick={() => {
-          localStorage.removeItem("isAuthenticated");
-          navigate("/login");
-        }}
-      >
-        Logout
-      </button>
+    <div className="Account-header">
+      <br />
+      <h2>
+        <strong>Account Details</strong>
+      </h2>
+      <div className="Account">
+        <p>
+          <strong>Name:</strong> {user.name}
+        </p>
+        <br />
+        <p>
+          <strong>Email:</strong> {user.email}
+        </p>
+        <br />
+        <h3>
+          <strong>Purchase History:</strong>
+        </h3>
+        {purchasedSwags.length === 0 ? (
+          <p>No purchase history.</p>
+        ) : (
+          purchasedSwags.map((book, index) => (
+            <div key={index}>
+              <p>{/* {book.item}  */}</p>
+              <button onClick={() => handleReturnSwag(index)}>
+                Return Item
+              </button>
+            </div>
+          ))
+        )}
+        <br />
+        <button
+          className="login-buttons"
+          onClick={() => {
+            localStorage.removeItem("isAuthenticated");
+            navigate("/login");
+          }}
+        >
+          Logout
+        </button>
+        <br />
+      </div>
     </div>
   );
 }
