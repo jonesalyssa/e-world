@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "./RegisterSlice";
 
 export default function Register() {
@@ -9,7 +9,7 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [registerUser] = useRegisterMutation();
 
   const handleRegister = (e) => {
@@ -22,7 +22,8 @@ export default function Register() {
     e.preventDefault();
     try {
       const response = await registerUser(form).unwrap();
-      // navigate("/");
+      console.log("Registration successful:", response);
+      navigate("/");
     } catch (error) {
       console.error(error);
     }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetSwagQuery } from "./singleSwagSlice";
+// import { useAddToCartMutation } from "../Cart/cartSlice";
 import "/src/index.css";
 
 export default function SingleProduct({
@@ -10,6 +11,7 @@ export default function SingleProduct({
   const { id } = useParams();
   const { data, isSuccess, isLoading } = useGetSwagQuery(id);
   const [product, setProduct] = useState(null);
+  // const [addtoCart] = useAddToCartMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -44,7 +46,7 @@ export default function SingleProduct({
             <button
               type="button"
               className="cart-button"
-              onClick={() => addtoCart(product.id)}
+              // onClick={() => addtoCart(product.id)}
             >
               Add to Cart
             </button>

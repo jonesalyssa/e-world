@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "./cartSlice";
-import "../index.css";
+import "/src/index.css";
+import { useGetCartQuery, useDeleteFromCartMutation } from "./cartSlice";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { data: cartItems, isSuccess, isLoading } = useGetCartQuery({ userId });
 
   const handleCheckout = () => {
     if (cartItems.length === 0) {
@@ -26,7 +27,7 @@ const Checkout = () => {
 
     alert("Purchase validated");
 
-    dispatch(clearCart());
+    // dispatch(clearCart());
     navigate("/account");
   };
 
