@@ -12,7 +12,7 @@ import SingleSwag from "./components/SingleSwag/SingleSwag";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
-// import Cart from "./components/Cart/cart";
+import Cart from "./components/Cart/cart";
 
 import "./index.css";
 
@@ -60,18 +60,9 @@ export default function App() {
                 element={<Login setIsAuthenticated={setIsAuthenticated} />}
               />
               <Route path="/About" element={<About />} />
-              {/* <Route path="/Cart" element={<Cart />} /> */}
+              <Route path="/Cart" element={<Cart />} />
               <Route path="/Contact" element={<Contact />} />
-              <Route
-                path="/account"
-                element={
-                  isAuthenticated ? (
-                    <Account />
-                  ) : (
-                    <Login setIsAuthenticated={setIsAuthenticated} />
-                  )
-                }
-              />
+              <Route path="/account" element={ <Account /> } />
             </Routes>
           </main>
           <Footer />

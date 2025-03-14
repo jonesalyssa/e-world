@@ -4,7 +4,7 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     // baseUrl: "https://e-world-backend.onrender.com",
-    baseUrl: "localhost:5173",
+    baseUrl: "http://localhost:3000",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       headers.set("Content-Type", "application/json");

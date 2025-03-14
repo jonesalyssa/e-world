@@ -3,7 +3,7 @@ import { api } from "../../app/api";
 
 const UserApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getUser: builder.mutation({
+    getUser: builder.query({
       query: () => ({
         url: "/auth/me",
         method: "GET",
@@ -14,7 +14,7 @@ const UserApi = api.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation } = loginApi;
+export const { useGetUserQuery } = UserApi;
 
 // const userSlice = createSlice({
 //   name: "user",
