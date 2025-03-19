@@ -14,12 +14,8 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Cart from "./components/Cart/cart";
 
-<<<<<<< HEAD
 // import "./index.css";
 import ProductList from "./components/ProductList";
-=======
-import "./index.css";
->>>>>>> 975e150b4225bf98ac16c2c1626bb852ea4367ad
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -72,55 +68,7 @@ export default function App() {
           </main>
           <Footer />
         </div>
-<<<<<<< HEAD
-        <NavBar />
-        <main>
-          {/* <ProductList /> */}
-          <Routes>
-            <Route path="/" element={<SwagDisplay />} />
-            <Route path="/Register" element={<Register />} />
-            <Route
-              path="/products/:id"
-              element={
-                <SingleSwag
-                  selectedProductId={selectedProductId}
-                  setSelectedProductId={setSelectedProductId}
-                />
-              }
-              // <Route
-              // path="/womens/Shirts"
-              // element={
-              //   <womensShirts
-              //     selectedProductId={selectedProductId}
-              //     setSelectedProductId={setSelectedProductId}
-              //   />}
-            />
-            <Route
-              path="/Login"
-              element={<Login setIsAuthenticated={setIsAuthenticated} />}
-            />
-            <Route path="/Cart" element={<Cart />} />
-            <Route path="/About" element={<About />} />
-            <Route path="/Contact" element={<Contact />} />
-            <Route
-              path="/account"
-              element={
-                isAuthenticated ? (
-                  <Account />
-                ) : (
-                  <Login setIsAuthenticated={setIsAuthenticated} />
-                )
-              }
-            />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
-    // </Provider>
-=======
       </Router>{" "}
     </Provider>
->>>>>>> 975e150b4225bf98ac16c2c1626bb852ea4367ad
   );
 }

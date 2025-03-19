@@ -23,17 +23,10 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      const response = await loginUser(form);
-      console.log(response.token);
-      localStorage.setItem("token", response.token);
-           navigate("/");
-=======
       const response = await loginUser(form).unwrap();
       console.log(response.token);
       localStorage.setItem("token", response.token);
       navigate("/");
->>>>>>> 975e150b4225bf98ac16c2c1626bb852ea4367ad
     } catch (error) {
       console.error(error);
     }
