@@ -9,14 +9,17 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Account from "./components/Account/Account";
 import SingleSwag from "./components/SingleSwag/SingleSwag";
-// import womensShirts from "./components/filteredItems/womensShirts";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Cart from "./components/Cart/cart";
 
+<<<<<<< HEAD
 // import "./index.css";
 import ProductList from "./components/ProductList";
+=======
+import "./index.css";
+>>>>>>> 975e150b4225bf98ac16c2c1626bb852ea4367ad
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -29,12 +32,47 @@ export default function App() {
   }, []);
 
   return (
-    // <Provider store={store}>
-    <Router>
-      <div>
-        <div className="header">
-          <img src={logoImage} alt="Logo" className="logo" />
+    <Provider store={store}>
+      <Router>
+        <div>
+          <div className="header">
+            <img src={logoImage} alt="Logo" className="logo" />
+          </div>
+          <NavBar />
+          <main>
+            {/* <ProductList /> */}
+            <Routes>
+              <Route path="/" element={<SwagDisplay />} />
+              <Route path="/Register" element={<Register />} />
+              <Route
+                path="/products/:id"
+                element={
+                  <SingleSwag
+                    selectedProductId={selectedProductId}
+                    setSelectedProductId={setSelectedProductId}
+                  />
+                }
+                // <Route
+                // path="/womens/Shirts"
+                // element={
+                //   <womensShirts
+                //     selectedProductId={selectedProductId}
+                //     setSelectedProductId={setSelectedProductId}
+                //   />}
+              />
+              <Route
+                path="/Login"
+                element={<Login setIsAuthenticated={setIsAuthenticated} />}
+              />
+              <Route path="/About" element={<About />} />
+              <Route path="/Cart" element={<Cart />} />
+              <Route path="/Contact" element={<Contact />} />
+              <Route path="/account" element={ <Account /> } />
+            </Routes>
+          </main>
+          <Footer />
         </div>
+<<<<<<< HEAD
         <NavBar />
         <main>
           {/* <ProductList /> */}
@@ -80,5 +118,9 @@ export default function App() {
       </div>
     </Router>
     // </Provider>
+=======
+      </Router>{" "}
+    </Provider>
+>>>>>>> 975e150b4225bf98ac16c2c1626bb852ea4367ad
   );
 }

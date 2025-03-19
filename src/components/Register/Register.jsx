@@ -41,7 +41,9 @@ export default function Register() {
       <div>
         <form onSubmit={submit}>
           <div>
-            <h1>REGISTER</h1>
+            <h1>
+              <strong>REGISTER</strong>
+            </h1>
             <label>
               {" "}
               <strong>Username:</strong>

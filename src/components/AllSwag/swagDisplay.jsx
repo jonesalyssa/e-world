@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "/src/index.css";
-import Footer from "/src/components/Footer";
 
 import { useGetAllSwagQuery } from "./swagSlice";
 import { useNavigate } from "react-router-dom";
@@ -48,8 +47,8 @@ export default function Products() {
 
   return (
     <article>
+      <br />
       <h1>All Products</h1>
-      <hr className="divider"></hr>
       <div className="search">
         <form className="search" onSubmit={handlesearch}>
           <label>
