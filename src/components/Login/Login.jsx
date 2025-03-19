@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "/src/index.css";
 
-//import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "./LoginSlice";
 
 export default function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [form, setForm] = useState({ username: "", password: "" });
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [loginUser] = useLoginMutation();
 
   const handleSubmit = (e) => {
@@ -24,9 +24,9 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await loginUser(form);
-      console.log(response);
-      localStorage.setItem("token", response.data.token);
-      //      navigate("/");
+      console.log(response.token);
+      localStorage.setItem("token", response.token);
+           navigate("/");
     } catch (error) {
       console.error(error);
     }

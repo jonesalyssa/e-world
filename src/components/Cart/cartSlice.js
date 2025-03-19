@@ -1,17 +1,15 @@
-import { api } from "../../app/api";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
-  name: "cart",
-  initialState: { items: [] },
+  name: 'cart',
+  initialState: {
+    items: [],
+  },
   reducers: {
-    addToCart: (state, action) => {
-      const item = action.payload;
-      if (!state.items.some((item) => item.id === item.id)) {
-        state.items.push(item);
-      }
+    addItem: (state, action) => {
+      state.items.push(action.payload);
     },
-    removeFromCart: (state, action) => {
+    removeItem: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
     clearCart: (state) => {
@@ -20,20 +18,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
-
-export const cartApi = api.injectEndpoints({
-  endpoints: (builder) => ({
-    login: builder.mutation({
-      query: () => ({
-        url: "/auth/cart",
-        method: "POST",
-        body: {},
-      }),
-      invalidatesTags: ["Swag", "User"],
-    }),
-  }),
-});
-
-export const { useLoginMutation } = cartApi;

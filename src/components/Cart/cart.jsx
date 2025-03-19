@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "./cartSlice";
-import "../index.css";
+// import "../index.css";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);

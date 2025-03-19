@@ -13,8 +13,9 @@ import SingleSwag from "./components/SingleSwag/SingleSwag";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Cart from "./components/Cart/cart";
 
-import "./index.css";
+// import "./index.css";
 import ProductList from "./components/ProductList";
 
 export default function App() {
@@ -60,6 +61,7 @@ export default function App() {
               path="/Login"
               element={<Login setIsAuthenticated={setIsAuthenticated} />}
             />
+            <Route path="/Cart" element={<Cart />} />
             <Route path="/About" element={<About />} />
             <Route path="/Contact" element={<Contact />} />
             <Route

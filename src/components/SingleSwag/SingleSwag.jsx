@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetSwagQuery } from "./singleSwagSlice";
+import { useDispatch } from "react-redux"; // Import useDispatch
+import { addItem } from "../Cart/cartSlice"; // Import addItem action
 import "/src/index.css";
 
 export default function SingleProduct({
@@ -10,6 +12,7 @@ export default function SingleProduct({
   const { id } = useParams();
   const { data, isSuccess, isLoading } = useGetSwagQuery(id);
   const [product, setProduct] = useState(null);
+  const dispatch = useDispatch(); // Get dispatch function
 
   useEffect(() => {
     if (isSuccess) {
@@ -18,68 +21,41 @@ export default function SingleProduct({
     }
   }, [data, isSuccess, setSelectedProductId]);
 
-  console.log(data);
-  console.log(product);
-  console.log(selectedProductId);
+  const addtoCart = () => {
+    if (product) {
+      dispatch(addItem(product)); // Dispatch addItem action
+      alert(`${product.title} added to cart!`);
+    }
+  };
 
   if (isLoading) return <p>Loading Product information...</p>;
   if (!product) return <p>Please select a product to see more details.</p>;
 
-  console.log(product.title);
-  let $details;
-  if (!selectedProductId) {
-    $details = <p>Please select a product to see more details.</p>;
-  } else if (isLoading) {
-    $details = <p>Loading Product information...</p>;
-  } else {
-    $details = (
-      <>
-<<<<<<< HEAD
-        <figure>
-          <img src={data.image} />
-        </figure>
-        <h3>{product.title}</h3>
-        Price: <h3> {product.price}</h3>
-        Description: <h4>{data.description}</h4>
-        {/* <h4> {product.available}</h4> */}
-   
-        <div className="book">
-          {/* <button
+  let $details = (
+    <>
+      <h3 className="single-title">{product.title}</h3>
+      <section className="product-details">
+        <div className="single-product">
+          <h4 className="price"> ${product.price}</h4>
+          <br />
+          <h4 className="description">{data.description}</h4>
+          <button
             type="button"
-            className="btn btn-primary "
-            onClick={() => addtoCart(product.id)}
+            className="cart-button"
+            onClick={addtoCart} // Call addtoCart
           >
-            {" "}
-            Checkout{" "}
-          </button> */}
+            Checkout
+          </button>
         </div>
-=======
-        <h3 className="single-title">{product.title}</h3>
-        <section className="product-details">
-          <div className="single-product">
-            <h4 className="price"> ${product.price}</h4>
-            <br />
-            <h4 className="description">{data.description}</h4>
-            <button
-              type="button"
-              className="cart-button"
-              onClick={() => addtoCart(product.id)}
-            >
-              Checkout
-            </button>
-          </div>
-          <div className="single-pic">
-            {/* <h4> {product.available}</h4> */}
+        <div className="single-pic">
+          <figure className="single-product-image">
+            <img className="single-image" src={data.image} alt={product.title} />
+          </figure>
+        </div>
+      </section>
+    </>
+  );
 
-            <figure className="single-product-image">
-              <img className="single-image" src={data.image} />
-            </figure>
-          </div>
-        </section>
->>>>>>> 9b712843cd121dab9c2979d7999652595c481502
-      </>
-    );
-  }
   return (
     <aside>
       <h2 className="selected-product"></h2>
