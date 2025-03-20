@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetSwagQuery } from "./singleSwagSlice";
-import { useDispatch } from "react-redux"; // Import useDispatch
-import { addItem } from "../Cart/cartSlice"; // Import addItem action
+import { useDispatch } from "react-redux";
+import { addItem } from "../Cart/cartSlice";
 import "/src/index.css";
 
 export default function SingleProduct({
@@ -49,10 +49,14 @@ export default function SingleProduct({
         </div>
         <div className="single-pic">
           <figure className="single-product-image">
-            <img className="single-image" src={data.image} alt={product.title} />
+            <img
+              className="single-image"
+              src={data.image}
+              alt={product.title}
+            />
           </figure>
         </div>
-      </section>git
+      </section>
     </>
   );
 

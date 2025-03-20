@@ -13,8 +13,9 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Cart from "./components/Cart/cart";
+// import FeaturedPopup from "./components/FeaturedPopup";
+import "./index.css";
 
-// import "./index.css";
 import ProductList from "./components/ProductList";
 
 export default function App() {
@@ -30,6 +31,15 @@ export default function App() {
   return (
     <Provider store={store}>
       <Router>
+        {/* <div>
+          <FeaturedPopup />
+        </div> */}
+        <section className="video-background">
+          <video autoPlay loop muted playsInline>
+            <source src="src/assets/Spring-Ticker.mp4" type="video/mp4" />
+          </video>
+        </section>
+
         <div>
           <div className="header">
             <img src={logoImage} alt="Logo" className="logo" />
@@ -48,14 +58,17 @@ export default function App() {
                     setSelectedProductId={setSelectedProductId}
                   />
                 }
-                // <Route
-                // path="/womens/Shirts"
-                // element={
-                //   <womensShirts
-                //     selectedProductId={selectedProductId}
-                //     setSelectedProductId={setSelectedProductId}
-                //   />}
               />
+              {/* Uncomment and add a component if needed */}
+              {/* <Route
+                path="/womens/Shirts"
+                element={
+                  <womensShirts
+                    selectedProductId={selectedProductId}
+                    setSelectedProductId={setSelectedProductId}
+                  />
+                }
+              /> */}
               <Route
                 path="/Login"
                 element={<Login setIsAuthenticated={setIsAuthenticated} />}
@@ -63,12 +76,12 @@ export default function App() {
               <Route path="/About" element={<About />} />
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Contact" element={<Contact />} />
-              <Route path="/account" element={ <Account /> } />
+              <Route path="/account" element={<Account />} />
             </Routes>
           </main>
           <Footer />
         </div>
-      </Router>{" "}
+      </Router>
     </Provider>
   );
 }

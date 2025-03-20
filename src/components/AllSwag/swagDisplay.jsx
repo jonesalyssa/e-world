@@ -1,22 +1,29 @@
-// This is not working
-
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "/src/index.css";
-
+import webVid from "/src/assets/WebVid.mp4";
 import { useGetAllSwagQuery } from "./swagSlice";
-import { useNavigate } from "react-router-dom";
-export default function Products() {
+
+export default function SwagDisplay() {
   const { data, isSuccess, isLoading, error } = useGetAllSwagQuery();
-  const [product, setProduct] = useState();
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(true); // Popup state
   const navigate = useNavigate();
+  const productsRef = useRef(null);
+
+  useEffect(() => {
+    if (productsRef.current) {
+      productsRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, []);
 
   const seeProductDetails = (id) => {
     navigate(`/products/${id}`);
   };
-
-  const [searchTerm, setSearchTerm] = useState("");
 
   const handlesearch = (e) => {
     e.preventDefault();
@@ -26,29 +33,49 @@ export default function Products() {
     setFilteredProducts(filtered);
   };
 
-  if (isSuccess && data) {
-    console.log("Data loaded successfully:", data);
-  }
-
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
-  if (error) {
-    return <h3>Error loading data!</h3>;
-  }
-
-  console.log(data);
-  console.log(product);
-
-  console.log("isLoading:", isLoading);
-  console.log("isSuccess:", isSuccess);
-  console.log("data:", data);
+  if (isLoading) return <h3>Loading...</h3>;
+  if (error) return <h3>Error loading data!</h3>;
 
   return (
     <article>
+      <div className="main-vid">
+        <video autoPlay loop muted playsInline>
+          <source src={webVid} type="video/mp4" />
+        </video>
+        <div className="shopnow-button">
+          <button
+            className="shop-now"
+            onClick={() =>
+              productsRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              })
+            }
+          >
+            Shop Now
+          </button>
+        </div>
+      </div>
       <br />
-      <h1>All Products</h1>
+
+      <div className="h1-container" ref={productsRef}>
+        <h1>All Products</h1>
+        {isPopupOpen && (
+          <div className="popup">
+            <button className="close-btn" onClick={() => setIsPopupOpen(false)}>
+              ×
+            </button>
+            <h2> Featured Find! </h2>
+            <img
+              src="/path-to-featured-image.jpg"
+              alt="Featured Item"
+              className="popup-img"
+            />
+            <button className="view-item">View Item</button>
+          </div>
+        )}
+      </div>
+
       <div className="search">
         <form className="search" onSubmit={handlesearch}>
           <label>
@@ -76,9 +103,8 @@ export default function Products() {
               <h3>
                 <strong>{p.title}</strong>
               </h3>
-              <br></br>
+              <br />
               <h3>${p.price}</h3>
-              {/* <p className="rating">⭐ {p.rating} / */}
               <button
                 type="button"
                 className="see-details"
