@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { swagApi } from '../components/SingleSwag/singleSwagSlice'; // Import your API slice
 import cartReducer from '../components/Cart/cartSlice'; // Import cart reducer
-// import userReducer from "../components/userSlice";
-import { userReducer } from "react";
+// import { useReducer } from "react";
+// import userReducer  from "../components/Account/userSlice";
 // import { cartApi } from "../components/Cart/cartSlice";
 import { api } from "./api";
 import {ThirdPartyApi}  from "./thirdPartyApi"
@@ -13,7 +13,7 @@ import registerSlice from "../components/Register/RegisterSlice";
 const store = configureStore({
   reducer: {
     [swagApi.reducerPath]: swagApi.reducer,
-    user: userReducer,
+    // user: userReducer,
     products: productReducer,
     [api.reducerPath]: api.reducer,
     [ThirdPartyApi.reducerPath]: ThirdPartyApi.reducer,

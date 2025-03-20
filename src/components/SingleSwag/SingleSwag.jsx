@@ -44,7 +44,7 @@ export default function SingleProduct({
             className="cart-button"
             onClick={addtoCart} // Call addtoCart
           >
-            Checkout
+            Add to Cart
           </button>
         </div>
         <div className="single-pic">
@@ -52,7 +52,7 @@ export default function SingleProduct({
             <img className="single-image" src={data.image} alt={product.title} />
           </figure>
         </div>
-      </section>
+      </section>git
     </>
   );
 

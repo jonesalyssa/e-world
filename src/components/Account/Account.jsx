@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
-import { data, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useGetUserQuery } from "./userSlice";
+// import { setUser } from "./userSlice";
+
 
 export default function Account() {
-  // const [user, setUser] = useState(null);
-  // const [purchasedSwags, setPurchasedSwags] = useState([]);
+  const [user, setUser] = useState({});
+  // const {data, error, isLoading} = useGetUserQuery();
+  const [purchasedSwags, setPurchasedSwags] = useState({});
   const navigate = useNavigate();
-  const {data: accountInfo} = useGetUserQuery();
+  const {data, isSuccess, isLoading, isError, error} = useGetUserQuery();
+
+console.log(data);
 
   let $details;
   // No items bought
-  if(!accountInfo){
+  if(!data){
     $details = <p>No items bought</p>
   }
   // Items have been bought but results are not returned yet
@@ -22,8 +27,8 @@ export default function Account() {
     $details =(
       <article>
         <ul className="cart">
-          <h4>Hello{accountInfo.username}, ({accountInfo.email})</h4>
-          <h5>You have {data.length} items in your cart</h5>
+          <h4>Hello{data.username}, ({data.email})</h4>
+          {/* <h5>You have {data.length} items in your cart</h5> */}
           {data.map((p)=>
           <li key ={p.id} className="cart">
             <h3>
@@ -47,31 +52,34 @@ export default function Account() {
       {$details}
     </aside>
   )
-
-  // useEffect(() => {
-  //   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-  //   if (!isAuthenticated) {
-  //     navigate("/login");
-  //     return;
-  //   }
+}
+//   useEffect(() => {
+//     const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+//     if (!isAuthenticated) {
+//       navigate("/login");
+//       return;
+//     }
 
 //     const storedEmail = localStorage.getItem("userEmail");
 //     const storedName = localStorage.getItem("userName");
 //     if (storedEmail && storedName) {
 //       setUser({ name: storedName, email: storedEmail });
 //     }
+// // console.log(storedItems);
+// console.log(user);
 
-//     const storedBooks =
-//       JSON.parse(localStorage.getItem("purchasedSwags")) || [];
-//     setPurchasedSwags(storedBooks);
-//   }, [navigate]);
+
+//     const storedItems =
+//       JSON.parse(localStorage.getItem("purchasedItems")) || [];
+//     setPurchasedSwags(storedItems);
+//   }, []);
 
 //   const handleReturnSwag = (swagIndex) => {
 //     const updatedBooks = purchasedSwags.filter(
 //       (_, index) => index !== swagIndex
 //     );
 //     setPurchasedSwags(updatedBooks);
-//     localStorage.setItem("purchasedSwags", JSON.stringify(updatedBooks));
+//     localStorage.setItem("purchasedSItems", JSON.stringify(updatedBooks));
 //   };
 
 //   if (!user) {
@@ -105,15 +113,15 @@ export default function Account() {
 //                 Return Item
 //               </button>
 //             </div>
-        //   ))
-        // )}
+//           ))
+//         )}
 //         <br />
 //         <button
 //           className="login-buttons"
 //           onClick={() => {
 //             localStorage.removeItem("isAuthenticated");
 //             navigate("/login");
-          // }}
+//           }}
 //         >
 //           Logout
 //         </button>
@@ -121,4 +129,47 @@ export default function Account() {
 //       </div>
 //     </div>
 //   );
-}
+// }
+
+//   const {data, isSuccess, isLoading, isError, error} = useGetUserQuery();
+// console.log(data);
+
+//   let $details;
+//   // No items bought
+//   if(!data){
+//     $details = <p>No items bought</p>
+//   }
+//   // Items have been bought but results are not returned yet
+//   else if (isLoading){
+//     $details = <p>Loading items in Cart</p>
+//   }
+//   // display list of items bought
+//   else{
+//     $details =(
+//       <article>
+//         <ul className="cart">
+//           <h4>Hello{data.username}, ({data.email})</h4>
+//           {/* <h5>You have {data.length} items in your cart</h5> */}
+//           {data.map((p)=>
+//           <li key ={p.id} className="cart">
+//             <h3>
+//               {p.title} & Price: {p.price}
+//               {p.description}
+//             </h3>
+//             <figure>
+//               <img src={p.image} alt={p.title} />
+//             </figure>
+  
+//           </li>
+//           )}
+//         </ul>
+//       </article>
+//     )
+//   }
+  
+//   return(
+//     <aside>
+//       <h2>My ACCOUNT</h2>
+//       {$details}
+//     </aside>
+//   )

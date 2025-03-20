@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { clearCart } from "./cartSlice";
 // import "../index.css";
 
+
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
@@ -30,21 +31,31 @@ const Checkout = () => {
     navigate("/account");
   };
 
+  const totalPrice = cartItems.reduce((total, item)=> total +item.price, 0)
+
   return (
     <div>
-      <h2>Checkout</h2>
+      <h2>My Cart</h2>
       <div>
         {cartItems.length > 0 ? (
           <div>
             <h3> Cart</h3>
+            <h5> Your total is: ${totalPrice} </h5>
             <ul>
               {cartItems.map((item) => (
-                <li key={item.id}>
-                  {item.name}, {item.size}
-                  {item.price}
+                
+                <li key={item.id} className="cartitem">
+                  <h3>
+                  {item.title},
+                  Price: {item.price},
+                  </h3>
+                  <figure>
+                    <img src={item.image} alt={item.title} />
+                  </figure>
                 </li>
               ))}
             </ul>
+            
             <button onClick={handleCheckout}>Checkout</button>
           </div>
         ) : (

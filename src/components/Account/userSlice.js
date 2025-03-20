@@ -1,4 +1,4 @@
-// import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { api } from "../../app/api";
 
 const UserApi = api.injectEndpoints({
@@ -8,7 +8,7 @@ const UserApi = api.injectEndpoints({
         url: "/auth/me",
         method: "GET",
       }),
-      invalidatesTags: ["Swag", "User"],
+      providesTags: ["Swag", "User"],
       transformResponse: (response) => response,
     }),
   }),
@@ -22,8 +22,6 @@ export const { useGetUserQuery } = UserApi;
 //   reducers: {
 //     setUser: (state, action) => {
 //       state.user = {
-//         first: action.payload.first || "",
-//         last: action.payload.last || "",
 //         username: action.payload.username || "",
 //         email: action.payload.email || "",
 //         password: action.payload.password || "",
@@ -46,6 +44,7 @@ export const { useGetUserQuery } = UserApi;
 //     },
 //   },
 // });
+// Create a slice for the user state
 
 // export const { setUser, logout, returnSwag, checkoutSwag } = userSlice.actions;
 
