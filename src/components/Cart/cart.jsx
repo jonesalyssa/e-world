@@ -1,8 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "./cartSlice";
-// import "../index.css";
-
+import "/src/index.css";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -31,10 +30,10 @@ const Checkout = () => {
     navigate("/account");
   };
 
-  const totalPrice = cartItems.reduce((total, item)=> total +item.price, 0)
+  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
 
   return (
-    <div>
+    <div className="cart-container">
       <h2>My Cart</h2>
       <div>
         {cartItems.length > 0 ? (
@@ -43,19 +42,21 @@ const Checkout = () => {
             <h5> Your total is: ${totalPrice} </h5>
             <ul>
               {cartItems.map((item) => (
-                
-                <li key={item.id} className="cartitem">
-                  <h3>
-                  {item.title},
-                  Price: {item.price},
+                <li key={item.id} className="cart-item">
+                  <h3 className="cart-price">
+                    {item.title}, Price: {item.price},
                   </h3>
                   <figure>
-                    <img src={item.image} alt={item.title} />
+                    <img
+                      className="cart-image"
+                      src={item.image}
+                      alt={item.title}
+                    />
                   </figure>
                 </li>
               ))}
             </ul>
-            
+
             <button onClick={handleCheckout}>Checkout</button>
           </div>
         ) : (

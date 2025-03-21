@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "/src/index.css";
 import webVid from "/src/assets/WebVid.mp4";
 import { useGetAllSwagQuery } from "./swagSlice";
@@ -8,22 +8,17 @@ export default function SwagDisplay() {
   const { data, isSuccess, isLoading, error } = useGetAllSwagQuery();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isPopupOpen, setIsPopupOpen] = useState(true); // Popup state
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [featuredProduct, setFeaturedProduct] = useState(null);
   const navigate = useNavigate();
   const productsRef = useRef(null);
 
   useEffect(() => {
-    if (productsRef.current) {
-      productsRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    if (isSuccess && data.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.length);
+      setFeaturedProduct(data[randomIndex]);
     }
-  }, []);
-
-  const seeProductDetails = (id) => {
-    navigate(`/products/${id}`);
-  };
+  }, [data, isSuccess]);
 
   const handlesearch = (e) => {
     e.preventDefault();
@@ -56,22 +51,31 @@ export default function SwagDisplay() {
           </button>
         </div>
       </div>
+
       <br />
 
+      {/* h1 with Popup Attached */}
       <div className="h1-container" ref={productsRef}>
         <h1>All Products</h1>
-        {isPopupOpen && (
+        {isPopupOpen && featuredProduct && (
           <div className="popup">
             <button className="close-btn" onClick={() => setIsPopupOpen(false)}>
               ×
             </button>
-            <h2> Featured Find! </h2>
+            <h2>Featured Find🔥</h2>
             <img
-              src="/path-to-featured-image.jpg"
-              alt="Featured Item"
+              src={featuredProduct.image}
+              alt={featuredProduct.title}
               className="popup-img"
             />
-            <button className="view-item">View Item</button>
+            <h3>{featuredProduct.title}</h3>
+            <p className="price">${featuredProduct.price}</p>
+            <button
+              className="view-item"
+              onClick={() => navigate(`/products/${featuredProduct.id}`)}
+            >
+              View Item
+            </button>
           </div>
         )}
       </div>
@@ -108,7 +112,7 @@ export default function SwagDisplay() {
               <button
                 type="button"
                 className="see-details"
-                onClick={() => seeProductDetails(p.id)}
+                onClick={() => navigate(`/products/${p.id}`)}
               >
                 See Details
               </button>

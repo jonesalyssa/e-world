@@ -285,6 +285,14 @@ aside {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.cart-item {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 /* Product Price */
 .price {
   font-size: 24px;
@@ -338,6 +346,12 @@ aside {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
+}
+
+.cart-image {
+  max-width: 10%;
+  height: auto;
+  justify-content: center;
 }
 
 .selected-product {
