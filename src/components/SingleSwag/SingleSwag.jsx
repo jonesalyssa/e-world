@@ -21,6 +21,8 @@ export default function SingleProduct({
     }
   }, [data, isSuccess, setSelectedProductId]);
 
+  
+  
   const addtoCart = () => {
     if (product) {
       dispatch(addItem(product)); // Dispatch addItem action

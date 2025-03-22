@@ -1,46 +1,42 @@
-import { useState, useEffect } from "react";
 import {  useNavigate } from "react-router-dom";
-import { useGetUserQuery } from "./userSlice";
+import { useGetUserQuery } from "../Login/LoginSlice";
 // import { setUser } from "./userSlice";
 
 
 export default function Account() {
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   // const {data, error, isLoading} = useGetUserQuery();
-  const [purchasedSwags, setPurchasedSwags] = useState({});
+  // const [purchasedSwags, setPurchasedSwags] = useState({});
   const navigate = useNavigate();
   const {data, isSuccess, isLoading, isError, error} = useGetUserQuery();
 
+console.log(useGetUserQuery);
+
 console.log(data);
+console.log(isSuccess);
+console.log(isLoading);
+console.log(isError);
+
+
 
   let $details;
-  // No items bought
+  // No user logged in
   if(!data){
-    $details = <p>No items bought</p>
+    $details = <p>No user logged in</p>
   }
-  // Items have been bought but results are not returned yet
+  // User is logged in but loading data
   else if (isLoading){
-    $details = <p>Loading items in Cart</p>
+    $details = <p>Loading Your Account</p>
   }
-  // display list of items bought
-  else{
+  else if (isError){
+    $details= <p>error loading your account</p>
+  }
+  // display account info
+  else if (data) {
     $details =(
       <article>
         <ul className="cart">
-          <h4>Hello{data.username}, ({data.email})</h4>
-          {/* <h5>You have {data.length} items in your cart</h5> */}
-          {data.map((p)=>
-          <li key ={p.id} className="cart">
-            <h3>
-              {p.title} & Price: {p.price}
-              {p.description}
-            </h3>
-            <figure>
-              <img src={p.image} alt={p.title} />
-            </figure>
-  
-          </li>
-          )}
+          <h4>Hello{data.username}, {data.email}</h4>
         </ul>
       </article>
     )

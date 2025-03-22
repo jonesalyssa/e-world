@@ -1,11 +1,11 @@
 // import { fetchProducts } from "/src/redux/actions/productActions";
-import { ThirdPartyApi } from "../../app/thirdPartyApi";
+import { api } from "../../app/api";
 
-const swagApi = ThirdPartyApi.injectEndpoints({
+const swagApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getSwag: builder.query({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/api/item/${id}`,
         method: "GET",
       }),
       providesTags: ["Swag", "User"],
