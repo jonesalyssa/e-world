@@ -1,19 +1,15 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "./LoginSlice";
 import "/src/index.css";
 
-import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "./LoginSlice";
-
-export default function Login() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+export default function Login({ setIsAuthenticated }) {
   const [form, setForm] = useState({ username: "", password: "" });
   const navigate = useNavigate();
   const [loginUser] = useLoginMutation();
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
     setForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -25,24 +21,17 @@ export default function Login() {
     try {
       const response = await loginUser(form).unwrap();
       console.log(response.token);
+
       localStorage.setItem("token", response.token);
+      localStorage.setItem("isAuthenticated", "true");
+
+      setIsAuthenticated(true);
       navigate("/");
     } catch (error) {
+      alert("Invalid login credentials");
       console.error(error);
     }
   };
-
-  //   const storedEmail = localStorage.getItem("userEmail");
-  //   const storedPassword = localStorage.getItem("userPassword");
-
-  //   if (email === storedEmail && password === storedPassword) {
-  //     localStorage.setItem("isAuthenticated", "true");
-  //     setIsAuthenticated(true);
-  //     navigate("/");
-  //   } else {
-  //     alert("Invalid login credentials");
-  //   }
-  // };
 
   return (
     <section className="login-section">
@@ -57,10 +46,9 @@ export default function Login() {
             </strong>
             <input
               type="text"
-              id="exampleInputUsername1"
-              value={form.username}
-              onChange={handleSubmit}
               name="username"
+              value={form.username}
+              onChange={handleChange}
               required
             />
           </div>
@@ -70,10 +58,9 @@ export default function Login() {
             </strong>
             <input
               type="password"
-              id="exampleInputPassword1"
-              value={form.password}
               name="password"
-              onChange={handleSubmit}
+              value={form.password}
+              onChange={handleChange}
               required
             />
           </div>
@@ -84,9 +71,7 @@ export default function Login() {
           <br />
           <div className="login-buttons">
             <Link to="/Register">
-              <button type="button" className="btn btn-primary">
-                Register
-              </button>
+              <button type="button">Register</button>
             </Link>
           </div>
         </form>

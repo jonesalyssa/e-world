@@ -13,7 +13,6 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Cart from "./components/Cart/cart";
-// import FeaturedPopup from "./components/FeaturedPopup";
 import "./index.css";
 
 import ProductList from "./components/ProductList";
@@ -31,20 +30,13 @@ export default function App() {
   return (
     <Provider store={store}>
       <Router>
-        {/* <div>
-          <FeaturedPopup />
-        </div> */}
-        <section className="video-background">
-          <video autoPlay loop muted playsInline>
-            <source src="src/assets/Spring-Ticker.mp4" type="video/mp4" />
-          </video>
-        </section>
+        <NavBar />
 
         <div>
-          <div className="header">
+          {/* <div className="header">
             <img src={logoImage} alt="Logo" className="logo" />
-          </div>
-          <NavBar />
+          </div> */}
+
           <main>
             {/* <ProductList /> */}
             <Routes>
@@ -59,16 +51,6 @@ export default function App() {
                   />
                 }
               />
-              {/* Uncomment and add a component if needed */}
-              {/* <Route
-                path="/womens/Shirts"
-                element={
-                  <womensShirts
-                    selectedProductId={selectedProductId}
-                    setSelectedProductId={setSelectedProductId}
-                  />
-                }
-              /> */}
               <Route
                 path="/Login"
                 element={<Login setIsAuthenticated={setIsAuthenticated} />}
