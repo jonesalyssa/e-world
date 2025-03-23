@@ -4,7 +4,7 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import store from "./app/store";
 import NavBar from "./components/Nav";
 import SwagDisplay from "./components/AllSwag/swagDisplay";
-import logoImage from "./assets/logo.png";
+// import logoImage from "./assets/logo.png";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Account from "./components/Account/Account";
@@ -15,7 +15,7 @@ import Contact from "./components/Contact";
 import Cart from "./components/Cart/cart";
 import "./index.css";
 
-import ProductList from "./components/ProductList";
+// import ProductList from "./components/ProductList";
 
 export default function App() {
   const [token, setToken] = useState(null);
