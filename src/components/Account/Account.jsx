@@ -1,6 +1,7 @@
 import {  useNavigate } from "react-router-dom";
 import { useGetUserQuery } from "../Login/LoginSlice";
 // import { setUser } from "./userSlice";
+import { useUserCartQuery } from "../Cart/cartSlice";
 
 
 export default function Account() {
@@ -9,12 +10,14 @@ export default function Account() {
   // const [purchasedSwags, setPurchasedSwags] = useState({});
   const navigate = useNavigate();
   const {data, isSuccess, isLoading, isError, error} = useGetUserQuery();
+  const {data: cart} =useUserCartQuery();
+  
 
-console.log(useGetUserQuery);
+
 
 console.log(data);
+console.log(cart);
 console.log(isSuccess);
-console.log(isLoading);
 console.log(isError);
 
 
@@ -36,7 +39,18 @@ console.log(isError);
     $details =(
       <article>
         <ul className="cart">
-          <h4>Hello{data.username}, {data.email}</h4>
+          <h4>Hello {data.username},
+          </h4>
+         email: <h4> {data.email}</h4>
+         Items Bought:
+          {cart.items.map((p)=>
+          <li key = {p.id} className="cartItems">
+          <h3>{p.itemTitle} @ ${p.price}</h3>
+          <figure>
+            <img src={p.itemImage} alt={p.title} />
+          </figure>
+        </li>
+         )}
         </ul>
       </article>
     )
