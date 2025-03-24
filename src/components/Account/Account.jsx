@@ -43,7 +43,7 @@ console.log(isError);
           </h4>
          email: <h4> {data.email}</h4>
          Items Bought:
-          {cart.items.map((p)=>
+          {cart?.items?.map((p)=>
           <li key = {p.id} className="cartItems">
           <h3>{p.itemTitle} @ ${p.price}</h3>
           <figure>
