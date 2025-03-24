@@ -1,10 +1,10 @@
-import { ThirdPartyApi } from "../../app/thirdPartyApi";
+import { api } from "../../app/api";
 
-const allSwagApi = ThirdPartyApi.injectEndpoints({
+const allSwagApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllSwag: builder.query({
       query: () => ({
-        url: "",
+        url: "/api/item/",
         method: "GET",
       }),
       providesTags: ["Swag", "User"],

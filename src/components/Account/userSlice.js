@@ -1,20 +1,39 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { api } from "../../app/api";
+// import { createSlice } from "@reduxjs/toolkit";
+// import { api } from "../../app/api";
 
-const UserApi = api.injectEndpoints({
-  endpoints: (builder) => ({
-    getUser: builder.query({
-      query: () => ({
-        url: "/auth/me",
-        method: "GET",
-      }),
-      providesTags: ["Swag", "User"],
-      transformResponse: (response) => response,
-    }),
-  }),
-});
+// const userApi = api.injectEndpoints({
+//   endpoints: (builder) => ({
+//     getUser: builder.query({
+//       query: () => ({
+//         url: "/auth/me",
+//         method: "GET",
+//       }),
+//       providesTags: ["Swag", "User"],
+//       transformResponse: (response) => response,
+//     }),
+//   }),
+// });
 
-export const { useGetUserQuery } = UserApi;
+// export const { useGetUserQuery } = userApi;
+
+// import { api } from "../../app/api";
+
+
+// const userApi = api.injectEndpoints({
+//     endpoints: (builder) => ({
+//         getUser: builder.query({
+//             query:() => ({
+//                 url: "/auth/me",
+//                 method:"GET",
+                
+//             }),
+//             invalidatesTags: ["Swag", "User"],
+//             transformResponse: (response) => response,
+//         }),
+//     }),
+// });
+
+// export const {useGetUserQuery} = userApi
 
 // const userSlice = createSlice({
 //   name: "user",
