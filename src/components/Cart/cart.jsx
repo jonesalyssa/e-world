@@ -117,7 +117,7 @@ export default function Checkout() {
   
   return (
     <aside>
-      <h1>My Cart:</h1>
+      <h1>MY CART:</h1>
       {$details}
       <button className="checkoutbutton" onClick={handleCheckout}>
         Checkout

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://e-world-backend-1.onrender.com",
+    baseUrl: "https://e-world-backend-fhqs.onrender.com",
     // baseUrl: "http://localhost:3000",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
