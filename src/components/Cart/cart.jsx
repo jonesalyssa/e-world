@@ -77,10 +77,10 @@ console.log("total price", totalPrice);
     $details=(
       <article>
         <ul className="cartItems">
-        <h4>Hello{accountInfo.username}, {accountInfo.email}</h4>
+        <h4>Hello{accountInfo?.username}, {accountInfo?.email}</h4>
         <h5>You have {data.items.length} items in your Cart</h5>
         <h5> Your total is: ${totalPrice} </h5>
-        {data.items.map((p)=>
+        {data?.items?.map((p)=>
         <li key = {p.id} className="cartItems">
           <h3>{p.itemTitle} @ ${p.price}</h3>
           <figure>
