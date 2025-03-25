@@ -77,7 +77,7 @@ console.log("total price", totalPrice);
     $details=(
       <article>
         <ul className="cartItems">
-        {/* <h4>Hello{accountInfo.username}, {accountInfo.email}</h4> */}
+        <h4>Hello{accountInfo.username}, {accountInfo.email}</h4>
         <h5>You have {data.items.length} items in your Cart</h5>
         <h5> Your total is: ${totalPrice} </h5>
         {data.items.map((p)=>
@@ -86,7 +86,7 @@ console.log("total price", totalPrice);
           <figure>
             <img src={p.itemImage} alt={p.title} />
           </figure>
-          <button type="button" className="btn btn-danger" onClick={() => handleReturnItem (p.id)}> Return </button>
+          <button type="button" className="btn btn-danger" onClick={() => handleReturnItem (p.itemId)}> Return </button>
         </li>
         )}
         </ul>
