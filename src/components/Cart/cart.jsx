@@ -2,46 +2,46 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "./cartSlice";
 import "/src/index.css";
-import { useUserCartQuery, useAddToCartMutation, useDeleteFromCartMutation } from "./cartSlice";
+import {
+  useUserCartQuery,
+  useAddToCartMutation,
+  useDeleteFromCartMutation,
+} from "./cartSlice";
 import { useGetUserQuery } from "../Login/LoginSlice";
 import { useState } from "react";
 
-
-
-export default function Checkout  ()  {
+export default function Checkout() {
   const [cartItems, setCartItems] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {data, isSuccess, isLoading}= useUserCartQuery();
-  const [addToCart]= useAddToCartMutation();
-  const[removeItem] = useDeleteFromCartMutation();
-  const {data: accountInfo} = useGetUserQuery();
+  const { data, isSuccess, isLoading } = useUserCartQuery();
+  const [addToCart] = useAddToCartMutation();
+  const [removeItem] = useDeleteFromCartMutation();
+  const { data: accountInfo } = useGetUserQuery();
 
   console.log(data);
-  
-  const handleReturnItem= async(ItemId) =>{
+
+  const handleReturnItem = async (ItemId) => {
     try {
-      await removeItem({ItemId});
-      console.log('item successfully returned?');
+      await removeItem({ ItemId });
+      console.log("item successfully returned?");
       window.location.reload();
     } catch (err) {
-      console.log('error while removing item from cart', err);
-      
+      console.log("error while removing item from cart", err);
     }
   };
-  
+
   const handleCheckout = () => {
     if (data.items.length === 0) {
       alert("Your cart is empty!");
       return;
     }
 
- 
-  const clearCartFrontend = () => {
-    // Clear the cart in frontend state (React state or Local Storage)
-    setCartItems([]); // For React state
-    localStorage.removeItem('cart'); // If you are using localStorage to persist cart
-  };
+    const clearCartFrontend = () => {
+      // Clear the cart in frontend state (React state or Local Storage)
+      setCartItems([]); // For React state
+      localStorage.removeItem("cart"); // If you are using localStorage to persist cart
+    };
 
     // const storedItems =
     //   JSON.parse(localStorage.getItem("purchasedItems")) || [];
@@ -58,51 +58,73 @@ export default function Checkout  ()  {
     // dispatch(clearCartFrontEnd());
     navigate("/account");
   };
-console.log(data);
+  console.log(data);
 
-  const totalPrice = data?.items?.reduce((sum, item) => sum+ item.price, 0);
-console.log("total price", totalPrice);
+  const totalPrice = data?.items
+    ?.reduce((sum, item) => sum + item.price, 0)
+    .toFixed(2);
+  console.log("total price", totalPrice);
 
   let $details;
   //no items in the cart
-  if(!data){
-    $details = <p>no items in your cart</p>
-  }
-  else if (isLoading){
-    $details = <p>loading cart items</p>
+  if (!data) {
+    $details = <p>no items in your cart</p>;
+  } else if (isLoading) {
+    $details = <p>loading cart items</p>;
   }
 
   //display items
-  else{
-    $details=(
+  else {
+    $details = (
       <article>
         <ul className="cartItems">
-        <h4>Hello{accountInfo?.username}, {accountInfo?.email}</h4>
-        <h5>You have {data.items.length} items in your Cart</h5>
-        <h5> Your total is: ${totalPrice} </h5>
-        {data?.items?.map((p)=>
-        <li key = {p.id} className="cartItems">
-          <h3>{p.itemTitle} @ ${p.price}</h3>
-          <figure>
-            <img src={p.itemImage} alt={p.title} />
-          </figure>
-          <button type="button" className="btn btn-danger" onClick={() => handleReturnItem (p.itemId)}> Return </button>
-        </li>
-        )}
+          <h4>
+            Hello {accountInfo?.username}, {accountInfo?.email}
+          </h4>
+          <h5>You have {data.items.length} items in your Cart</h5>
+          <h5>Your total is: ${totalPrice}</h5>
+          <br/>
+  
+          {data?.items?.map((p) => (
+            <li key={p.id} className="cart-item">
+              <div className="cart-image-container">
+                <figure>
+                  <img
+                    className="cart-image"
+                    src={p.itemImage}
+                    alt={p.itemTitle}
+                  />
+                </figure>
+              </div>
+  
+              <div className="cart-details">
+                <h4>{p.itemTitle}</h4>
+                <p>${p.price}</p>
+                <button
+                  type="button"
+                  className="returnbutton"
+                  onClick={() => handleReturnItem(p.itemId)}
+                >
+                  Return
+                </button>
+              </div>
+            </li>
+          ))}
         </ul>
       </article>
-    )
+    );
   }
-
+  
   return (
     <aside>
-        <h2>My Cart: </h2>
-        {$details}
-        <button onClick={handleCheckout}>Checkout</button>
-        </aside>
-)
-
-}
+      <h1>My Cart:</h1>
+      {$details}
+      <button className="checkoutbutton" onClick={handleCheckout}>
+        Checkout
+      </button>
+    </aside>
+  );
+}  
 //   return (
 //     <div className="cart-container">
 //       <h2>My Cart</h2>

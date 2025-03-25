@@ -7,10 +7,12 @@ import buttonjacket from "/src/assets/buttonjacket.mp4";
 import computer from "/src/assets/computer.mp4";
 import gamingmonitor from "/src/assets/gamingmonitor.mp4";
 import { useGetAllSwagQuery } from "./swagSlice";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function ProductCard({ product, navigate }) {
   return (
-    <li className="view-all">
+    <li className="view-all" data-aos="fade-up">
       <figure className="all-figure">
         <img
           className="products-image"
@@ -42,7 +44,7 @@ export default function SwagDisplay() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(true);
   const [featuredProduct, setFeaturedProduct] = useState(null);
-  const [hasReachedProducts, setHasReachedProducts] = useState(false); // ✅ Add this line here
+  const [hasReachedProducts, setHasReachedProducts] = useState(false);
   const navigate = useNavigate();
   const productsRef = useRef(null);
 
@@ -54,14 +56,20 @@ export default function SwagDisplay() {
   }, [data, isSuccess]);
 
   useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Delay popup by 15 seconds (15000 ms)
           const timer = setTimeout(() => {
             setHasReachedProducts(true);
           }, 15000);
-
           return () => clearTimeout(timer);
         }
       },
@@ -111,14 +119,12 @@ export default function SwagDisplay() {
         </div>
       </div>
 
-      <br />
-
-      <div className="h1-container" ref={productsRef}>
+      <div className="h1-container" ref={productsRef} data-aos="fade-up">
         <h1>Products</h1>
       </div>
 
       {hasReachedProducts && isPopupOpen && featuredProduct && (
-        <div className="popup-overlay">
+        <div className="popup-overlay" data-aos="zoom-in">
           <div className="popup">
             <button className="close-btn" onClick={() => setIsPopupOpen(false)}>
               ×
@@ -141,7 +147,7 @@ export default function SwagDisplay() {
         </div>
       )}
 
-      <div className="search">
+      <div className="search" data-aos="fade-up">
         <form className="search" onSubmit={handlesearch}>
           <label>
             <input
@@ -159,16 +165,16 @@ export default function SwagDisplay() {
       </div>
 
       {filteredProducts.length > 0 ? (
-        <ul className="all-container">
+        <ul className="all-container" data-aos="fade-up">
           {filteredProducts.map((p) => (
             <ProductCard key={p.id} product={p} navigate={navigate} />
           ))}
         </ul>
       ) : (
         <>
-          <section className="all">
-            <h1 id="shirts" className="scroll-offset">
-              Women's Shirts
+          <section className="all" data-aos="fade-up">
+            <h1 id="jewlery" className="scroll-offset">
+              Jewlery
             </h1>
             <div className="all-container">
               {[data[6], data[7], data[5], data[6]].map(
@@ -180,7 +186,7 @@ export default function SwagDisplay() {
             </div>
           </section>
 
-          <ul className="double-container">
+          <ul className="double-container" data-aos="fade-up">
             <h1 id="womens-jackets">Women's Secondhand Second Layers</h1>
 
             <section className="dual">
@@ -199,7 +205,6 @@ export default function SwagDisplay() {
                   </div>
                 )}
               </div>
-
               <div className="text">
                 <div className="scroll-vid">
                   <video autoPlay loop muted playsInline>
@@ -280,12 +285,11 @@ export default function SwagDisplay() {
             </section>
           </ul>
 
-          <h1 id="menshirts" className="scroll-offset">
-            {" "}
+          <h1 id="menshirts" className="scroll-offset" data-aos="fade-up">
             Men's Shirts
           </h1>
 
-          <ul className="all-container">
+          <ul className="all-container" data-aos="fade-up">
             {data.slice(0, 4).map((p) => (
               <ProductCard key={p.id} product={p} navigate={navigate} />
             ))}
@@ -321,9 +325,11 @@ export default function SwagDisplay() {
             </section>
           </ul>
 
-          <h1 id="tech">Tech Accessories</h1>
+          <h1 id="tech" data-aos="fade-up">
+            Tech Accessories
+          </h1>
 
-          <ul className="all-container">
+          <ul className="all-container" data-aos="fade-up">
             {[8, 9, 10, 11].map(
               (i) =>
                 data[i] && (

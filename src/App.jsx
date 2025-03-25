@@ -37,7 +37,7 @@ export default function App() {
             <img src={logoImage} alt="Logo" className="logo" />
           </div> */}
 
-          <main>
+          <main className="main-content">
             {/* <ProductList /> */}
             <Routes>
               <Route path="/" element={<SwagDisplay />} />

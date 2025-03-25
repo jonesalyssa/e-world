@@ -1,12 +1,12 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import { setToken } from "./Account/userSlice";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import SpringTicker from "/src/assets/Spring-Ticker.mp4";
 import EWorldNav from "/src/assets/EWorldNav.png";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
 
   const scrollToSection = (id) => {
@@ -27,46 +27,51 @@ const NavBar = () => {
       <div className="NavBar sticky-top">
         <div className="container">
           <header>
-            <nav className="flex gap-4">
-              <img src={EWorldNav} alt="Logo" className="navimg" />
-              <div
-                className="dropdown"
-                onMouseEnter={() => setProductsDropdownOpen(true)}
-                onMouseLeave={() => setProductsDropdownOpen(false)}
-              >
-                <Link to="/" className="NavLink">
-                  Home ▽
-                </Link>
-                {productsDropdownOpen && (
-                  <div className="dropdown-menu">
-                    <span className="dropdown-title">Products</span>
-                    <button
-                      onClick={() => scrollToSection("shirts")}
-                      className="dropdown-link"
-                    >
-                      Women's Shirts
-                    </button>
-                    <button
-                      onClick={() => scrollToSection("menshirts")}
-                      className="dropdown-link"
-                    >
-                      Men's Shirts
-                    </button>
-                    <button
-                      onClick={() => scrollToSection("jewlery")}
-                      className="dropdown-link"
-                    >
-                      Jewelry
-                    </button>
-                    <button
-                      onClick={() => scrollToSection("tech")}
-                      className="dropdown-link"
-                    >
-                      Tech Accessories
-                    </button>
-                  </div>
-                )}
-              </div>
+            <nav className="NavBar">
+              <Link to="/">
+                <img src={EWorldNav} alt="Logo" className="navimg" />
+              </Link>
+
+              {isHome && (
+                <div
+                  className="dropdown"
+                  onMouseEnter={() => setProductsDropdownOpen(true)}
+                  onMouseLeave={() => setProductsDropdownOpen(false)}
+                >
+                  <Link to="/" className="NavLink">
+                    Home ▽
+                  </Link>
+                  {productsDropdownOpen && (
+                    <div className="dropdown-menu">
+                      <span className="dropdown-title">Products</span>
+                      <button
+                        onClick={() => scrollToSection("shirts")}
+                        className="dropdown-link"
+                      >
+                        Women's Shirts
+                      </button>
+                      <button
+                        onClick={() => scrollToSection("menshirts")}
+                        className="dropdown-link"
+                      >
+                        Men's Shirts
+                      </button>
+                      <button
+                        onClick={() => scrollToSection("jewlery")}
+                        className="dropdown-link"
+                      >
+                        Jewelry
+                      </button>
+                      <button
+                        onClick={() => scrollToSection("tech")}
+                        className="dropdown-link"
+                      >
+                        Tech Accessories
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
 
               <a className="NavLink" onClick={() => navigate("/cart")}>
                 <svg
